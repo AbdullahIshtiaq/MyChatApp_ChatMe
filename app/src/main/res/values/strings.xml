@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Attendance_App_EzilineTest</string>
+
+    <style name="ShapeAppearance">
+        <item name="neumorph_cornerFamily">oval</item>
+    </style>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

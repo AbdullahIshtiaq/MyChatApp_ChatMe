@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color1"
+    tools:context=".student.ui.ProfileActivity">
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/layout_Right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".9" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/layout_Left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".1" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/Image_Top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".09" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/Image_Bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".4" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/GuideLine_Name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".5" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/GuideLine_Status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".55" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/GuideLine_TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".6" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/GuideLine_TotalFriends"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".69" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/GuideLine_Btn1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".78" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profile_image"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/defaultprofile"
+        app:layout_constraintBottom_toBottomOf="@id/Image_Bottom"
+        app:layout_constraintEnd_toEndOf="@id/layout_Right"
+        app:layout_constraintStart_toStartOf="@id/layout_Left"
+        app:layout_constraintTop_toTopOf="@id/Image_Top" />
+
+    <TextView
+        android:id="@+id/name_studentProfile"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/GuideLine_Name"
+        app:layout_constraintEnd_toEndOf="@id/layout_Right"
+        app:layout_constraintStart_toStartOf="@id/layout_Left"
+        android:text="Abdullah Ishtiaq"
+        android:textSize="25sp"
+        android:gravity="center" />
+
+    <TextView
+        android:id="@+id/rollNumber_studentProfile"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/GuideLine_Status"
+        app:layout_constraintEnd_toEndOf="@id/layout_Right"
+        app:layout_constraintStart_toStartOf="@id/layout_Left"
+        android:text="SP19-BSE-005"
+        android:textSize="18sp"
+        android:gravity="center" />
+
+    <TextView
+        android:id="@+id/class_studentProfile"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/GuideLine_TextView"
+        app:layout_constraintEnd_toEndOf="@id/layout_Right"
+        app:layout_constraintStart_toStartOf="@id/layout_Left"
+        android:text="Class: 13"
+        android:textSize="18sp"
+        android:gravity="center" />
+
+    <Button
+        android:id="@+id/change_Image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/GuideLine_Btn1"
+        app:layout_constraintEnd_toEndOf="@id/layout_Right"
+        app:layout_constraintStart_toStartOf="@id/layout_Left"
+        android:padding="15dp"
+        android:backgroundTint="@color/light_green"
+        android:text="Change Image" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.attendance_app_ezilinetest">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/app_logo"
+        android:label="My School"
+        android:roundIcon="@drawable/app_logo"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Attendance_App_EzilineTest">
+        <activity android:name=".EmptyActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".student.ui.ProfileActivity" />
+        <activity android:name=".admin.ui.EditAttendanceActivity" />
+        <activity android:name=".admin.ui.GenerateStudentReportActivity" />
+        <activity android:name=".admin.ui.LeaveRequestsActivity" />
+        <activity android:name=".admin.ui.StudentDetailsActivity" />
+        <activity android:name=".admin.ui.ViewAllAttendanceActivity" />
+        <activity android:name=".admin.ui.AdminHomeActivity" />
+        <activity android:name=".admin.ui.AdminLoginActivity" />
+        <activity
+            android:name=".student.ui.RequestLeaveActivity"
+            android:parentActivityName=".student.ui.StudentHomeActivity" />
+        <activity
+            android:name=".student.ui.RegistrationActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".student.ui.LoginActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity android:name=".student.ui.StudentHomeActivity">
+
+        </activity>
+        <activity android:name=".MainActivity"></activity>
+        <activity
+            android:name="com.canhub.cropper.CropImageActivity"
+            android:theme="@style/Base.Theme.AppCompat" />
+    </application>
+
+</manifest>

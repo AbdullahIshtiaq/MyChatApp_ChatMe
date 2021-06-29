@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color1"
+    tools:context=".admin.ui.GenerateStudentReportActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="20dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text="Student Report Generator"
+                android:textAlignment="center"
+                android:textColor="@color/light_green"
+                android:textSize="20sp" />
+
+            <soup.neumorphism.NeumorphCardView
+                style="@style/Widget.Neumorph.CardView"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                app:neumorph_shapeType="pressed">
+
+                <EditText
+                    android:id="@+id/roll_NumberET_StudentReport"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@android:color/transparent"
+                    android:hint="Student Roll Number"
+                    android:padding="2dp"
+                    android:textColor="@color/light_green"
+                    android:textColorHint="@color/light_green"
+                    android:textSize="15sp" />
+
+            </soup.neumorphism.NeumorphCardView>
+
+            <soup.neumorphism.NeumorphCardView
+                style="@style/Widget.Neumorph.CardView"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                app:neumorph_shapeType="pressed">
+
+                <TextView
+                    android:id="@+id/fromDate_StudentReport"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@android:color/transparent"
+                    android:hint="Select FROM Date"
+                    android:padding="2dp"
+                    android:textColor="@color/light_green"
+                    android:textColorHint="@color/light_green"
+                    android:textSize="15sp" />
+
+            </soup.neumorphism.NeumorphCardView>
+
+            <soup.neumorphism.NeumorphCardView
+                style="@style/Widget.Neumorph.CardView"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                app:neumorph_shapeType="pressed">
+
+                <TextView
+                    android:id="@+id/toDate_StudentReport"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@android:color/transparent"
+                    android:hint="Select TO Date"
+                    android:padding="2dp"
+                    android:textColor="@color/light_green"
+                    android:textColorHint="@color/light_green"
+                    android:textSize="15sp" />
+
+            </soup.neumorphism.NeumorphCardView>
+
+            <soup.neumorphism.NeumorphButton
+                android:id="@+id/generateReportBtn_StudentReport"
+                style="@style/Widget.Neumorph.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="70dp"
+                android:layout_gravity="center_horizontal"
+                android:text="Generate"
+                android:textColor="@color/white"
+                app:neumorph_backgroundColor="@color/light_green">
+
+            </soup.neumorphism.NeumorphButton>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardView_StudentReport"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/rollNumberTV_StudentReport"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="sp19-bse-005"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/nameTV_StudentReport"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Abdullah Ishtiaq"
+                        android:textSize="17sp" />
+
+                    <TextView
+                        android:id="@+id/classTV_StudentReport"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Class: 13"
+                        android:textSize="15sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/presentsTV_StudentReport"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Presents: 20"
+                            android:textSize="15sp"
+                            android:textColor="@color/light_green"
+                            android:layout_weight="1" />
+
+                        <TextView
+                            android:id="@+id/absentsTV_StudentReport"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Absents: 20"
+                            android:textSize="15sp"
+                            android:textColor="@color/red"
+                            android:layout_weight="1" />
+
+                        <TextView
+                            android:id="@+id/gradeTV_StudentReport"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Grade: 100%"
+                            android:textSize="15sp"
+                            android:textColor="@color/light_green"
+                            android:layout_weight="1" />
+
+
+                    </LinearLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recView_StudentReport"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:orientation="vertical"
+                        tools:listitem="@layout/student_report_item" />
+
+
+                </LinearLayout>
+
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

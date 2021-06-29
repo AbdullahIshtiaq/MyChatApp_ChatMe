@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color1"
+    tools:context=".student.ui.StudentHomeActivity">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/GuideLine_Top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".0" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/GuideLine_mid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".06" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/GuideLine_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent=".03" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/GuideLine_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="1" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/GuideLine_FragmentBottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".9" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/GuideLine_Bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="1" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/light_green"
+        app:layout_constraintBottom_toBottomOf="@id/GuideLine_mid"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="@id/GuideLine_Top"
+        app:layout_constraintBottom_toBottomOf="@id/GuideLine_mid">
+
+        <TextView
+            android:id="@+id/title_StudentHome"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="Mark Attendance"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:textColor="@color/color1"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/profile_StudentHome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/profile"
+        android:layout_margin="10dp"
+        app:layout_constraintLeft_toLeftOf="@id/GuideLine_left"
+        app:layout_constraintTop_toTopOf="@id/GuideLine_Top"
+        app:layout_constraintBottom_toBottomOf="@id/GuideLine_mid" />
+
+    <ImageView
+        android:id="@+id/threeDots_StudentHome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/three_dots"
+        android:layout_margin="10dp"
+        app:layout_constraintRight_toLeftOf="@id/GuideLine_right"
+        app:layout_constraintTop_toTopOf="@id/GuideLine_Top"
+        app:layout_constraintBottom_toBottomOf="@id/GuideLine_mid" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/GuideLine_mid"
+        app:layout_constraintBottom_toTopOf="@id/GuideLine_FragmentBottom">
+
+        <FrameLayout
+            android:id="@+id/frameLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+    <soup.neumorphism.NeumorphCardView
+        style="@style/Widget.Neumorph.CardView"
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/GuideLine_Bottom">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:orientation="horizontal"
+            android:background="@color/light_green"
+            android:padding="10dp">
+
+            <ImageView
+                android:id="@+id/markAttendance_Home"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/mark_attendance"
+                android:layout_weight="1" />
+
+            <ImageView
+                android:id="@+id/requestLeave_Home"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/mark_leave"
+                android:layout_weight="1" />
+
+            <ImageView
+                android:id="@+id/viewAttendance_Home"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/view_my_attendance"
+                android:layout_weight="1" />
+
+        </LinearLayout>
+
+    </soup.neumorphism.NeumorphCardView>
+
+    <RelativeLayout
+        android:id="@+id/relativelayout_studentHome"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:onClick="dummyClick"
+        app:layout_constraintTop_toBottomOf="@id/GuideLine_mid"
+        app:layout_constraintBottom_toTopOf="@id/GuideLine_Bottom"
+        android:visibility="gone">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="15dp">
+
+            <Button
+                android:id="@+id/signOut_studentHome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sign Out"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/red" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

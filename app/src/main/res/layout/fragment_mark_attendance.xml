@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color1"
+    tools:context=".student.fragments.MarkAttendanceFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+
+        <soup.neumorphism.NeumorphCardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:padding="40dp"
+            app:neumorph_shadowElevation="6dp"
+            app:neumorph_shapeAppearance="@style/ShapeAppearance"
+            app:neumorph_shapeType="pressed">
+
+            <soup.neumorphism.NeumorphButton
+                android:id="@+id/markAttendanceBtn_MA"
+                style="@style/Widget.Neumorph.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="20dp"
+                android:text="Mark Attendance"
+                android:textColor="@color/light_green"
+                app:neumorph_shadowElevation="4dp" />
+
+        </soup.neumorphism.NeumorphCardView>
+
+    </LinearLayout>
+
+</FrameLayout>

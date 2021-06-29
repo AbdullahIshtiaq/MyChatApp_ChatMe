@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color1"
+    tools:context=".student.ui.RegistrationActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Student Registration"
+                android:textSize="25sp"
+                android:layout_gravity="center_horizontal"
+                android:textAlignment="center"
+                android:layout_marginTop="20dp"
+                android:textColor="@color/light_green"
+                android:layout_marginBottom="20dp" />
+
+            <soup.neumorphism.NeumorphCardView
+                style="@style/Widget.Neumorph.CardView"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_margin="10dp"
+                app:neumorph_shapeType="pressed">
+
+                <EditText
+                    android:id="@+id/fullName_Reg"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@android:color/transparent"
+                    android:hint="Full Name"
+                    android:textColorHint="@color/light_green"
+                    android:textColor="@color/light_green"
+                    android:drawableLeft="@drawable/name"
+                    android:drawablePadding="10dp"
+                    android:padding="2dp" />
+
+            </soup.neumorphism.NeumorphCardView>
+
+            <soup.neumorphism.NeumorphCardView
+                style="@style/Widget.Neumorph.CardView"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_margin="10dp"
+                app:neumorph_shapeType="pressed">
+
+                <EditText
+                    android:id="@+id/rollNumber_Reg"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:padding="2dp"
+                    android:hint="Roll Number"
+                    android:textColorHint="@color/light_green"
+                    android:textColor="@color/light_green"
+                    android:drawableLeft="@drawable/registration_number"
+                    android:drawablePadding="10dp"
+                    android:background="@android:color/transparent" />
+
+            </soup.neumorphism.NeumorphCardView>
+
+            <soup.neumorphism.NeumorphCardView
+                style="@style/Widget.Neumorph.CardView"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_margin="10dp"
+                app:neumorph_shapeType="pressed">
+
+                <EditText
+                    android:id="@+id/class_Reg"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:padding="2dp"
+                    android:hint="Class"
+                    android:textColorHint="@color/light_green"
+                    android:textColor="@color/light_green"
+                    android:drawableLeft="@drawable/classroom"
+                    android:drawablePadding="10dp"
+                    android:background="@android:color/transparent" />
+
+            </soup.neumorphism.NeumorphCardView>
+
+            <soup.neumorphism.NeumorphCardView
+                style="@style/Widget.Neumorph.CardView"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_margin="10dp"
+                app:neumorph_shapeType="pressed">
+
+                <EditText
+                    android:id="@+id/password_Reg"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:padding="2dp"
+                    android:hint="Password"
+                    android:textColorHint="@color/light_green"
+                    android:textColor="@color/light_green"
+                    android:drawableLeft="@drawable/password"
+                    android:drawablePadding="10dp"
+                    android:background="@android:color/transparent" />
+
+            </soup.neumorphism.NeumorphCardView>
+
+            <soup.neumorphism.NeumorphButton
+                android:id="@+id/registerBtn_Reg"
+                style="@style/Widget.Neumorph.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="70dp"
+                android:layout_margin="10dp"
+                android:layout_gravity="center_horizontal"
+                app:neumorph_backgroundColor="@color/light_green"
+                android:textColor="@color/white"
+                android:text="Register">
+
+            </soup.neumorphism.NeumorphButton>
+
+            <TextView
+                android:id="@+id/login_Reg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/light_green"
+                android:text="Already have an account? LOGIN"
+                android:textSize="14sp"
+                android:layout_gravity="center_horizontal" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

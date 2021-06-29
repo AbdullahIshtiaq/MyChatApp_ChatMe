@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "736851646347",
+    "project_id": "attendanceappeziline",
+    "storage_bucket": "attendanceappeziline.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:736851646347:android:97cfb64ea8df8691c6c18e",
+        "android_client_info": {
+          "package_name": "com.example.attendance_app_ezilinetest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "736851646347-f6u41vo6kig3pq22dpfut8vcg163kh8v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDxQBPmlkYhkhhZar7SVDb_eZ5iKM9yxwY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "736851646347-f6u41vo6kig3pq22dpfut8vcg163kh8v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
