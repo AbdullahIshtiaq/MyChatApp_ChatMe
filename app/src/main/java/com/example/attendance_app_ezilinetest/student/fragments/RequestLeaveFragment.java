@@ -54,6 +54,8 @@ public class RequestLeaveFragment extends Fragment {
         String roll_number = prefs.getString("roll_number", "Empty");
 
         mAuth = FirebaseAuth.getInstance();
+        //    mAuth = FirebaseAuth.getInstance();
+        //    mAuth = FirebaseAuth.getInstance();
 
         mCurrent_user_id = mAuth.getCurrentUser().getUid();
 
