@@ -19,6 +19,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
         <activity android:name=".student.ui.ProfileActivity" />
         <activity android:name=".admin.ui.EditAttendanceActivity" />
@@ -27,20 +28,13 @@
         <activity android:name=".admin.ui.StudentDetailsActivity" />
         <activity android:name=".admin.ui.ViewAllAttendanceActivity" />
         <activity android:name=".admin.ui.AdminHomeActivity" />
-        <activity android:name=".admin.ui.AdminLoginActivity" />
         <activity
             android:name=".student.ui.RequestLeaveActivity"
             android:parentActivityName=".student.ui.StudentHomeActivity" />
-        <activity
-            android:name=".student.ui.RegistrationActivity"
-            android:parentActivityName=".MainActivity" />
-        <activity
-            android:name=".student.ui.LoginActivity"
-            android:parentActivityName=".MainActivity" />
-        <activity android:name=".student.ui.StudentHomeActivity">
+        <activity android:name=".student.ui.RegistrationActivity" />
+        <activity android:name=".student.ui.LoginActivity"></activity>
+        <activity android:name=".student.ui.StudentHomeActivity"></activity>
 
-        </activity>
-        <activity android:name=".MainActivity"></activity>
         <activity
             android:name="com.canhub.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat" />

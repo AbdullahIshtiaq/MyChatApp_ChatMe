@@ -6,6 +6,7 @@ import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.attendance_app_ezilinetest.student.ui.LoginActivity;
 import com.example.attendance_app_ezilinetest.student.ui.StudentHomeActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -26,12 +27,12 @@ public class EmptyActivity extends AppCompatActivity {
         if (currentUser == null) {
             Log.wtf("-this", "First if");
             FirebaseAuth.getInstance().signOut();
-            startActivity(new Intent(EmptyActivity.this, MainActivity.class));
+            startActivity(new Intent(EmptyActivity.this, LoginActivity.class));
             finish();
         } else if (currentUser.getEmail().contentEquals("admin@adm.com")) {
             Log.wtf("-this", "Its Admin");
             FirebaseAuth.getInstance().signOut();
-            startActivity(new Intent(EmptyActivity.this, MainActivity.class));
+            startActivity(new Intent(EmptyActivity.this, LoginActivity.class));
             finish();
         } else {
             Log.wtf("-this", "Student: " + currentUser.getEmail());

@@ -3,14 +3,15 @@ package com.example.attendance_app_ezilinetest.admin.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.attendance_app_ezilinetest.R;
 import com.example.attendance_app_ezilinetest.admin.adapter.FireBaseAdapter_ViewAllAttendance;
 import com.example.attendance_app_ezilinetest.dataModels.Attendance;
+import com.example.attendance_app_ezilinetest.databinding.ActivityViewAllAttendanceBinding;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -18,9 +19,9 @@ import com.google.firebase.database.Query;
 
 public class ViewAllAttendanceActivity extends AppCompatActivity {
 
+    private ActivityViewAllAttendanceBinding binding;
+    private View view;
     private FireBaseAdapter_ViewAllAttendance adapter;
-    private RecyclerView recyclerView;
-
     private DatabaseReference mAttendanceDatabase;
 
     @Override
@@ -28,7 +29,9 @@ public class ViewAllAttendanceActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_all_attendance);
 
-        recyclerView = findViewById(R.id.rec_ViewAllAttendance);
+        binding = ActivityViewAllAttendanceBinding.inflate(getLayoutInflater());
+        view = binding.getRoot();
+        setContentView(view);
 
         Log.wtf("-this", "48 Line");
 
@@ -36,7 +39,7 @@ public class ViewAllAttendanceActivity extends AppCompatActivity {
 
         Query query = mAttendanceDatabase.orderByKey();
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        binding.recViewViewAllAttendance.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
         FirebaseRecyclerOptions options =
                 new FirebaseRecyclerOptions.Builder<Attendance>().setQuery(
@@ -45,7 +48,7 @@ public class ViewAllAttendanceActivity extends AppCompatActivity {
 
         adapter = new FireBaseAdapter_ViewAllAttendance(options, ViewAllAttendanceActivity.this);
 
-        recyclerView.setAdapter(adapter);
+        binding.recViewViewAllAttendance.setAdapter(adapter);
     }
 
     @Override

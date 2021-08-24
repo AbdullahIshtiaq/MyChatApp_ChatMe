@@ -5,17 +5,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.attendance_app_ezilinetest.MainActivity;
 import com.example.attendance_app_ezilinetest.R;
+import com.example.attendance_app_ezilinetest.databinding.ActivityRegistrationBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -33,9 +30,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class RegistrationActivity extends AppCompatActivity {
-    private EditText name, rollNumber, Class, password;
-    private TextView loginText;
-    private Button register;
+    private ActivityRegistrationBinding binding;
+    private View view;
     private ProgressDialog mProgress;
 
     private FirebaseAuth fAuth;
@@ -50,12 +46,9 @@ public class RegistrationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
 
-        name = findViewById(R.id.fullName_Reg);
-        rollNumber = findViewById(R.id.rollNumber_Reg);
-        Class = findViewById(R.id.class_Reg);
-        password = findViewById(R.id.password_Reg);
-        register = findViewById(R.id.registerBtn_Reg);
-        loginText = findViewById(R.id.login_Reg);
+        binding = ActivityRegistrationBinding.inflate(getLayoutInflater());
+        view = binding.getRoot();
+        setContentView(view);
 
         mProgress = new ProgressDialog(this);
 
@@ -64,26 +57,25 @@ public class RegistrationActivity extends AppCompatActivity {
 
         searchRollNumber();
 
-        register.setOnClickListener(new View.OnClickListener() {
+        binding.btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String stdRollNumber = rollNumber.getText().toString().trim();
+                String stdRollNumber = binding.rollNumberReg.getText().toString().trim();
 
                 if (TextUtils.isEmpty(stdRollNumber)) {
-                    rollNumber.setError("Roll Number is Required");
+                    binding.rollNumberReg.setError("Roll Number is Required");
                     return;
                 }
-                rollNumber.setError(null);
+                binding.rollNumberReg.setError(null);
 
                 findInList(stdRollNumber);
             }
         });
 
-        loginText.setOnClickListener(new View.OnClickListener() {
+        binding.btnLogRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(RegistrationActivity.this, LoginActivity.class));
-                finish();
+                onBackPressed();
             }
         });
     }
@@ -98,7 +90,7 @@ public class RegistrationActivity extends AppCompatActivity {
                 }
             }
             if (foundName) {
-                rollNumber.setError("Roll Number Already Registered");
+                binding.rollNumberReg.setError("Roll Number Already Registered");
             } else {
                 register();
             }
@@ -109,42 +101,42 @@ public class RegistrationActivity extends AppCompatActivity {
 
     public void register() {
 
-        String stdName = name.getText().toString().trim();
-        String stdRollNumber = rollNumber.getText().toString().trim();
-        String stdClass = Class.getText().toString().trim();
-        String stdPassword = password.getText().toString().trim();
+        String stdName = binding.nameReg.getText().toString().trim();
+        String stdRollNumber = binding.nameReg.getText().toString().trim();
+        String stdClass = binding.classReg.getText().toString().trim();
+        String stdPassword = binding.passwordReg.getText().toString().trim();
 
         if (TextUtils.isEmpty(stdName)) {
-            name.setError("Name is Required");
+            binding.nameReg.setError("Name is Required");
             return;
         }
-        name.setError(null);
+        binding.nameReg.setError(null);
         if (TextUtils.isEmpty(stdRollNumber)) {
-            rollNumber.setError("Roll Number is Required");
+            binding.nameReg.setError("Roll Number is Required");
             return;
         }
-        rollNumber.setError(null);
+        binding.nameReg.setError(null);
         if (TextUtils.isEmpty(stdClass)) {
-            Class.setError("Class is Required");
+            binding.classReg.setError("Class is Required");
             return;
         }
-        Class.setError(null);
+        binding.classReg.setError(null);
         if (TextUtils.isEmpty(stdPassword)) {
-            password.setError("Password is Required");
+            binding.passwordReg.setError("Password is Required");
             return;
         }
-        password.setError(null);
+        binding.passwordReg.setError(null);
 
         if (stdPassword.length() < 6) {
-            password.setError("Password Must be >= 6 Characters");
+            binding.passwordReg.setError("Password Must be >= 6 Characters");
             return;
         }
-        password.setError(null);
+        binding.passwordReg.setError(null);
 
         String reg_no = stdRollNumber;
         stdRollNumber += "@std.com";
 
-        register.setEnabled(false);
+        binding.btnRegister.setEnabled(false);
 
         mProgress.setTitle("Registering Student");
         mProgress.setMessage("Please wait while we create user");
@@ -185,6 +177,7 @@ public class RegistrationActivity extends AppCompatActivity {
                     });
                 } else {
                     Toast.makeText(RegistrationActivity.this, "Error ! " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                    binding.btnRegister.setEnabled(true);
                     mProgress.dismiss();
                 }
             }
@@ -228,9 +221,8 @@ public class RegistrationActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        //super.onBackPressed();
-        startActivity(new Intent(RegistrationActivity.this, MainActivity.class));
-        finish();
+        super.onBackPressed();
+        overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
     }
 
 }

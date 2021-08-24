@@ -16,4 +16,12 @@
     <color name="transparent_white">#99FFFFFF</color>
     <color name="transparent_green">#9900c853</color>
 
+    <color name="colorPrimary">#00c853</color>
+    <color name="colorPrimaryDark">#a8ff78</color>
+    <color name="colorAccent">#80FFC4</color>
+    <color name="summer_dog">#a8ff78</color>
+
+    <color name="cardColor">#ffffff</color>
+    <color name="textcardColor">#3f3f3f</color>
+
 </resources>

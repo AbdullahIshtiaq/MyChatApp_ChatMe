@@ -1,5 +1,6 @@
 package com.example.attendance_app_ezilinetest.admin.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -23,14 +24,17 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
-public class RecyclerViewAdapter_EditAttendance extends RecyclerView.Adapter<RecyclerViewAdapter_EditAttendance.EditAttendanceViewHolder> {
+public class RecyclerViewAdapter_EditAttendance extends
+        RecyclerView.Adapter<RecyclerViewAdapter_EditAttendance.EditAttendanceViewHolder> {
 
     private static Context context;
+    private Activity activity;
     private ArrayList<customAttendance> recAttendanceList;
 
 
-    public RecyclerViewAdapter_EditAttendance(Context context, ArrayList<customAttendance> recAttendanceList) {
+    public RecyclerViewAdapter_EditAttendance(Context context, ArrayList<customAttendance> recAttendanceList, Activity activity) {
         this.context = context;
+        this.activity = activity;
         this.recAttendanceList = recAttendanceList;
     }
 
@@ -38,52 +42,55 @@ public class RecyclerViewAdapter_EditAttendance extends RecyclerView.Adapter<Rec
     @NotNull
     @Override
     public EditAttendanceViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.edit_attendance_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.edit_attendance_item, parent,
+                false);
         return new RecyclerViewAdapter_EditAttendance.EditAttendanceViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull @NotNull RecyclerViewAdapter_EditAttendance.EditAttendanceViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull @NotNull RecyclerViewAdapter_EditAttendance.EditAttendanceViewHolder holder,
+                                 int position) {
         DatabaseReference mAttendance = FirebaseDatabase.getInstance().getReference().child("Attendance");
         holder.setDate(recAttendanceList.get(position).getDate());
         holder.setStatus(recAttendanceList.get(position).getStatus());
         holder.editBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EditAttendanceActivity.relativeLayout.setVisibility(View.VISIBLE);
-                EditAttendanceActivity.relativeLayout1.setVisibility(View.VISIBLE);
+                EditAttendanceActivity.showRelativeView();
 
                 EditAttendanceActivity.presentBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        mAttendance.child(recAttendanceList.get(position).getDate()).child(recAttendanceList.get(position).getRollNumber())
-                                .child("isPresent").setValue("Present").addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull @NotNull Task<Void> task) {
-                                if (task.isSuccessful()) {
-                                    holder.setStatus("Present");
-                                    EditAttendanceActivity.relativeLayout.setVisibility(View.GONE);
-                                    EditAttendanceActivity.relativeLayout1.setVisibility(View.GONE);
-                                }
-                            }
-                        });
+                        mAttendance.child(recAttendanceList.get(position).getDate())
+                                .child(recAttendanceList.get(position).getRollNumber())
+                                .child("isPresent").setValue("Present")
+                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull @NotNull Task<Void> task) {
+                                        if (task.isSuccessful()) {
+                                            holder.setStatus("Present");
+                                            EditAttendanceActivity.hideRelativeView();
+                                        }
+                                    }
+                                });
                     }
                 });
 
                 EditAttendanceActivity.absentBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        mAttendance.child(recAttendanceList.get(position).getDate()).child(recAttendanceList.get(position).getRollNumber())
-                                .child("isPresent").setValue("Absent").addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull @NotNull Task<Void> task) {
-                                if (task.isSuccessful()) {
-                                    holder.setStatus("Absent");
-                                    EditAttendanceActivity.relativeLayout.setVisibility(View.GONE);
-                                    EditAttendanceActivity.relativeLayout1.setVisibility(View.GONE);
-                                }
-                            }
-                        });
+                        mAttendance.child(recAttendanceList.get(position).getDate())
+                                .child(recAttendanceList.get(position).getRollNumber())
+                                .child("isPresent").setValue("Absent")
+                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull @NotNull Task<Void> task) {
+                                        if (task.isSuccessful()) {
+                                            holder.setStatus("Absent");
+                                            EditAttendanceActivity.hideRelativeView();
+                                        }
+                                    }
+                                });
                     }
                 });
             }

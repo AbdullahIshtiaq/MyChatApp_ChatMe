@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color1"
     tools:context=".admin.ui.EditAttendanceActivity">
 
     <androidx.constraintlayout.widget.Guideline
@@ -27,56 +26,62 @@
         android:layout_margin="10dp"
         android:orientation="vertical">
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:text="Edit Student Attendance"
             android:textAlignment="center"
             android:textColor="@color/light_green"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            style="@style/TextAppearance.MaterialComponents.Headline1" />
 
-        <soup.neumorphism.NeumorphCardView
-            style="@style/Widget.Neumorph.CardView"
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
-            android:layout_height="70dp"
-            app:neumorph_shapeType="pressed">
+            android:layout_height="60dp"
+            android:layout_margin="6dp"
+            android:elevation="6dp"
+            app:cardCornerRadius="15dp">
 
-            <EditText
-                android:id="@+id/roll_NumberET_EditAttendance"
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginBottom="10dp"
-                android:background="@android:color/transparent"
-                android:hint="Student Roll Number"
-                android:padding="2dp"
-                android:textColor="@color/light_green"
-                android:textColorHint="@color/light_green"
-                android:textSize="15sp" />
+                android:paddingStart="6dp"
+                android:paddingEnd="6dp">
 
-        </soup.neumorphism.NeumorphCardView>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/roll_NumberET_EditAttendance"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:drawablePadding="6dp"
+                    android:hint="Student Roll Number"
+                    android:textColorHint="@color/light_green"
+                    android:inputType="text" />
 
-        <soup.neumorphism.NeumorphButton
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/searchBtn_EditAttendance"
-            style="@style/Widget.Neumorph.Button"
             android:layout_width="wrap_content"
-            android:layout_height="70dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
             android:layout_gravity="center_horizontal"
             android:text="Search"
             android:textColor="@color/white"
-            app:neumorph_backgroundColor="@color/light_green">
-
-        </soup.neumorphism.NeumorphButton>
+            android:textStyle="bold"
+            app:backgroundTint="@null"
+            android:background="@drawable/search_btn_bg" />
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardView_EditAttendance"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
+            android:elevation="6dp"
+            app:cardCornerRadius="15dp"
             android:visibility="gone">
 
             <LinearLayout
@@ -105,7 +110,9 @@
         android:layout_height="match_parent"
         android:background="@color/transparent_white"
         android:clickable="false"
-        android:visibility="gone"></RelativeLayout>
+        android:visibility="gone">
+
+    </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/relativeView1_EditAttendance"
@@ -127,23 +134,25 @@
                 android:layout_gravity="center"
                 android:gravity="center">
 
-                <Button
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/markPresent_EditAttendance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Mark Present"
-                    android:backgroundTint="@color/light_green" />
+                    app:backgroundTint="@null"
+                    android:background="@drawable/search_btn_bg" />
 
                 <LinearLayout
                     android:layout_width="10dp"
                     android:layout_height="wrap_content" />
 
-                <Button
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/markAbsent_EditAttendance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Mark Present"
-                    android:backgroundTint="@color/red" />
+                    android:text="Mark Absent"
+                    app:backgroundTint="@null"
+                    android:background="@drawable/mark_absent_btn_bg" />
 
             </LinearLayout>
 

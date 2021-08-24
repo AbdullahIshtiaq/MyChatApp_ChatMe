@@ -6,19 +6,16 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.attendance_app_ezilinetest.R;
 import com.example.attendance_app_ezilinetest.admin.adapter.RecyclerViewAdapter_EditAttendance;
 import com.example.attendance_app_ezilinetest.dataModels.customAttendance;
-import com.google.android.material.card.MaterialCardView;
+import com.example.attendance_app_ezilinetest.databinding.ActivityEditAttendanceBinding;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -32,15 +29,12 @@ import java.util.ArrayList;
 
 public class EditAttendanceActivity extends AppCompatActivity {
 
+    private static ActivityEditAttendanceBinding binding;
+    private View view;
+
     private RecyclerViewAdapter_EditAttendance adapter;
 
-    public static RelativeLayout relativeLayout, relativeLayout1;
     public static Button presentBtn, absentBtn;
-
-    private EditText rollNumberEditTxt;
-    private Button searchBtn;
-    private RecyclerView recyclerViewEditAttendance;
-    private MaterialCardView cardView;
 
     private DatabaseReference mStudentDatabase, mAttendanceDatabase;
 
@@ -52,53 +46,47 @@ public class EditAttendanceActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_attendance);
+
+        binding = ActivityEditAttendanceBinding.inflate(getLayoutInflater());
+        view = binding.getRoot();
+        setContentView(view);
+
         mStudentDatabase = FirebaseDatabase.getInstance().getReference().child("Students");
         mAttendanceDatabase = FirebaseDatabase.getInstance().getReference().child("Attendance");
+
+        presentBtn = findViewById(R.id.markPresent_EditAttendance);
+        absentBtn = findViewById(R.id.markAbsent_EditAttendance);
 
         Log.wtf("-this", "Start 74 ");
         searchRollNumber();
         gettingDates();
         Log.wtf("-this", "77 ");
 
-        rollNumberEditTxt = findViewById(R.id.roll_NumberET_EditAttendance);
-        searchBtn = findViewById(R.id.searchBtn_EditAttendance);
-        recyclerViewEditAttendance = findViewById(R.id.recView_EditAttendance);
-        cardView = findViewById(R.id.cardView_EditAttendance);
-
-        presentBtn = findViewById(R.id.markPresent_EditAttendance);
-        absentBtn = findViewById(R.id.markAbsent_EditAttendance);
-
-
-        relativeLayout = findViewById(R.id.relativeView_EditAttendance);
-        relativeLayout1 = findViewById(R.id.relativeView1_EditAttendance);
-
-        searchBtn.setOnClickListener(new View.OnClickListener() {
+        binding.searchBtnEditAttendance.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String roll_number = rollNumberEditTxt.getText().toString().trim();
+                String roll_number = binding.rollNumberETEditAttendance.getText().toString().trim();
 
                 if (TextUtils.isEmpty(roll_number)) {
-                    rollNumberEditTxt.setError("Roll Number Required");
+                    binding.rollNumberETEditAttendance.setError("Roll Number Required");
                     return;
                 }
-                rollNumberEditTxt.setError(null);
+                binding.rollNumberETEditAttendance.setError(null);
                 findInList(roll_number);
             }
         });
-
 
     }
 
     public void populateRecyclerView(int index) {
         Log.wtf("-this", "populateRecyclerView 152");
-        cardView.setVisibility(View.VISIBLE);
+        binding.cardViewEditAttendance.setVisibility(View.VISIBLE);
 
         filterAttendanceList(rollNumberList.get(index));
 
-        recyclerViewEditAttendance.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new RecyclerViewAdapter_EditAttendance(this, myAttendanceList);
-        recyclerViewEditAttendance.setAdapter(adapter);
-
+        binding.recViewEditAttendance.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new RecyclerViewAdapter_EditAttendance(this, myAttendanceList, EditAttendanceActivity.this);
+        binding.recViewEditAttendance.setAdapter(adapter);
     }
 
     private void searchRollNumber() {
@@ -214,8 +202,8 @@ public class EditAttendanceActivity extends AppCompatActivity {
                 }
             }
             if (!foundName) {
-                rollNumberEditTxt.setError("Roll Number not Registered");
-                cardView.setVisibility(View.GONE);
+                binding.rollNumberETEditAttendance.setError("Roll Number not Registered");
+                binding.cardViewEditAttendance.setVisibility(View.GONE);
             }
         }
     }
@@ -229,6 +217,16 @@ public class EditAttendanceActivity extends AppCompatActivity {
                 myAttendanceList.add(ca);
             }
         }
+    }
+
+    public static void showRelativeView() {
+        binding.relativeViewEditAttendance.setVisibility(View.VISIBLE);
+        binding.relativeView1EditAttendance.setVisibility(View.VISIBLE);
+    }
+
+    public static void hideRelativeView() {
+        binding.relativeViewEditAttendance.setVisibility(View.GONE);
+        binding.relativeView1EditAttendance.setVisibility(View.GONE);
     }
 
     @Override

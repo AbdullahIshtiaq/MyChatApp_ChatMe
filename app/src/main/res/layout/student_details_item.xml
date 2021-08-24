@@ -8,6 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
+        android:elevation="6dp"
         app:cardCornerRadius="20dp">
 
         <LinearLayout
@@ -24,7 +25,7 @@
                 android:layout_weight="1"
                 android:orientation="vertical">
 
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/rollNumber_StudentItem"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -34,7 +35,7 @@
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/name_StudentItem"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -43,7 +44,7 @@
                     android:textAlignment="center"
                     android:textSize="17sp" />
 
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/classRoom_StudentItem"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -77,7 +78,7 @@
                     android:layout_weight="1"
                     android:orientation="vertical">
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -85,7 +86,7 @@
                         android:textAlignment="center"
                         android:textSize="14sp" />
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/presents_StudentItem"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -103,7 +104,7 @@
                     android:layout_weight="1"
                     android:orientation="vertical">
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -111,7 +112,7 @@
                         android:textAlignment="center"
                         android:textSize="14sp" />
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/attendanceGrade_StudentItem"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -129,7 +130,7 @@
                     android:layout_weight="1"
                     android:orientation="vertical">
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -137,7 +138,7 @@
                         android:textAlignment="center"
                         android:textSize="14sp" />
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/absents_StudentItem"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"

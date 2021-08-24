@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color1"
     tools:context=".student.ui.StudentHomeActivity">
 
     <androidx.constraintlayout.widget.Guideline
@@ -63,7 +62,7 @@
         app:layout_constraintTop_toTopOf="@id/GuideLine_Top"
         app:layout_constraintBottom_toBottomOf="@id/GuideLine_mid">
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/title_StudentHome"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -90,7 +89,7 @@
         android:id="@+id/threeDots_StudentHome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/three_dots"
+        android:src="@drawable/ic_three_dots_white"
         android:layout_margin="10dp"
         app:layout_constraintRight_toLeftOf="@id/GuideLine_right"
         app:layout_constraintTop_toTopOf="@id/GuideLine_Top"
@@ -155,6 +154,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:onClick="dummyClick"
+        android:background="@color/transparent_white"
         app:layout_constraintTop_toBottomOf="@id/GuideLine_mid"
         app:layout_constraintBottom_toTopOf="@id/GuideLine_Bottom"
         android:visibility="gone">

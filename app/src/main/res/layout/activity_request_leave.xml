@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color1"
     tools:context=".student.ui.RequestLeaveActivity">
 
     <ScrollView
@@ -17,91 +16,98 @@
             android:orientation="vertical"
             android:layout_margin="20dp">
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Make Request"
-                android:textSize="30sp"
+                android:textSize="20sp"
                 android:textAlignment="center"
-                android:layout_marginTop="20dp"
                 android:textColor="@color/light_green"
-                android:layout_marginBottom="20dp" />
+                android:layout_marginBottom="20dp"
+                style="@style/TextAppearance.MaterialComponents.Headline1" />
 
-            <soup.neumorphism.NeumorphCardView
-                style="@style/Widget.Neumorph.CardView"
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:layout_margin="10dp"
-                app:neumorph_shapeType="pressed">
+                android:layout_height="60dp"
+                android:layout_margin="6dp"
+                android:elevation="6dp"
+                app:cardCornerRadius="15dp">
 
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/leaveStartDate"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="15dp"
                     android:layout_gravity="center"
-                    android:padding="2dp"
-                    android:textSize="15sp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="center|start"
                     android:hint="Select Start Date"
-                    android:textColorHint="@color/light_green"
+                    android:padding="2dp"
                     android:textColor="@color/light_green"
-                    android:background="@android:color/transparent" />
+                    android:textColorHint="@color/light_green"
+                    android:textSize="15sp" />
 
-            </soup.neumorphism.NeumorphCardView>
+            </com.google.android.material.card.MaterialCardView>
 
-            <soup.neumorphism.NeumorphCardView
-                style="@style/Widget.Neumorph.CardView"
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:layout_margin="10dp"
-                app:neumorph_shapeType="pressed">
+                android:layout_height="60dp"
+                android:layout_margin="6dp"
+                android:elevation="6dp"
+                app:cardCornerRadius="15dp">
 
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/leaveEndDate"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="15dp"
                     android:layout_gravity="center"
-                    android:padding="2dp"
-                    android:textSize="15sp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="center|start"
                     android:hint="Select End Date"
-                    android:textColorHint="@color/light_green"
+                    android:padding="2dp"
                     android:textColor="@color/light_green"
-                    android:background="@android:color/transparent" />
+                    android:textColorHint="@color/light_green"
+                    android:textSize="15sp" />
 
-            </soup.neumorphism.NeumorphCardView>
+            </com.google.android.material.card.MaterialCardView>
 
-            <soup.neumorphism.NeumorphCardView
-                style="@style/Widget.Neumorph.CardView"
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:layout_margin="10dp"
-                app:neumorph_shapeType="pressed">
+                android:elevation="6dp"
+                app:cardCornerRadius="15dp">
 
-                <EditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/reason_ReqLeave"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="15dp"
-                    android:padding="5dp"
+                    android:background="@color/white"
                     android:hint="Write Reason Here"
-                    android:textColorHint="@color/light_green"
-                    android:textColor="@color/light_green"
-                    android:background="@android:color/transparent" />
+                    android:inputType="text"
+                    android:textColorHint="@color/light_green" />
 
-            </soup.neumorphism.NeumorphCardView>
+            </com.google.android.material.card.MaterialCardView>
 
-            <soup.neumorphism.NeumorphButton
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/ReqLeaveBtn_ReqLeave"
-                style="@style/Widget.Neumorph.Button"
                 android:layout_width="wrap_content"
-                android:layout_height="70dp"
-                android:layout_margin="20dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                app:neumorph_backgroundColor="@color/light_green"
+                android:layout_margin="15dp"
+                android:background="@drawable/search_btn_bg"
+                android:text="Request Leave"
                 android:textColor="@color/white"
-                android:text="Request Leave"></soup.neumorphism.NeumorphButton>
+                android:textStyle="bold"
+                app:backgroundTint="@null">
 
+            </com.google.android.material.button.MaterialButton>
         </LinearLayout>
 
     </ScrollView>

@@ -5,8 +5,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -15,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.canhub.cropper.CropImage;
 import com.example.attendance_app_ezilinetest.R;
+import com.example.attendance_app_ezilinetest.databinding.ActivityProfileBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -36,15 +35,13 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 
-import de.hdodenhof.circleimageview.CircleImageView;
-
 public class ProfileActivity extends AppCompatActivity {
+
+    private ActivityProfileBinding binding;
+    private View view;
 
     private DatabaseReference mStudentDatabase;
     private FirebaseUser mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();
-    private CircleImageView mImage;
-    private TextView mName, mRollNumber, mClass;
-    private Button ImageBtn;
 
     private ProgressDialog mProgress;
 
@@ -52,18 +49,16 @@ public class ProfileActivity extends AppCompatActivity {
 
     private StorageReference mImageStorage;
 
-    protected String downloadUrl, thumb_downloadUrl;
+    protected String downloadUrl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        mImage = findViewById(R.id.profile_image);
-        mName = findViewById(R.id.name_studentProfile);
-        ImageBtn = findViewById(R.id.change_Image);
-        mRollNumber = findViewById(R.id.rollNumber_studentProfile);
-        mClass = findViewById(R.id.class_studentProfile);
+        binding = ActivityProfileBinding.inflate(getLayoutInflater());
+        view = binding.getRoot();
+        setContentView(view);
 
         mProgress = new ProgressDialog(this);
 
@@ -84,20 +79,20 @@ public class ProfileActivity extends AppCompatActivity {
                     String roll = snapshot.child("roll_number").getValue().toString();
                     String classRoom = snapshot.child("class_room").getValue().toString();
 
-                    mName.setText(name);
-                    mRollNumber.setText(roll);
-                    mClass.setText("Class: " + classRoom);
+                    binding.nameStudentProfile.setText(name);
+                    binding.rollNumberStudentProfile.setText(roll);
+                    binding.classStudentProfile.setText("Class: " + classRoom);
 
                     if (!image.equals("default")) {
                         Picasso.get().load(image).networkPolicy(NetworkPolicy.OFFLINE)
-                                .placeholder(R.drawable.defaultprofile).into(mImage, new Callback() {
+                                .placeholder(R.drawable.defaultprofile).into(binding.profileImage, new Callback() {
                             @Override
                             public void onSuccess() {
                             }
 
                             @Override
                             public void onError(Exception e) {
-                                Picasso.get().load(image).placeholder(R.drawable.defaultprofile).into(mImage);
+                                Picasso.get().load(image).placeholder(R.drawable.defaultprofile).into(binding.profileImage);
                             }
                         });
                     }
@@ -126,7 +121,7 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
-        ImageBtn.setOnClickListener(new View.OnClickListener() {
+        binding.changeImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent galleryIntent = new Intent();
@@ -197,14 +192,14 @@ public class ProfileActivity extends AppCompatActivity {
                                                 mProgress.dismiss();
                                                 String image = downloadUrl;
                                                 Picasso.get().load(image).networkPolicy(NetworkPolicy.OFFLINE)
-                                                        .placeholder(R.drawable.defaultprofile).into(mImage, new Callback() {
+                                                        .placeholder(R.drawable.defaultprofile).into(binding.profileImage, new Callback() {
                                                     @Override
                                                     public void onSuccess() {
                                                     }
 
                                                     @Override
                                                     public void onError(Exception e) {
-                                                        Picasso.get().load(image).placeholder(R.drawable.defaultprofile).into(mImage);
+                                                        Picasso.get().load(image).placeholder(R.drawable.defaultprofile).into(binding.profileImage);
                                                     }
                                                 });
                                                 Toast.makeText(ProfileActivity.this, "Uploading Successful", Toast.LENGTH_LONG).show();

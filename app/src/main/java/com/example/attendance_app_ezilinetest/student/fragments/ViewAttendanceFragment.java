@@ -81,7 +81,7 @@ public class ViewAttendanceFragment extends Fragment {
 
     private String getCurrentDate() {
         Date cd = Calendar.getInstance().getTime();
-        SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy", Locale.getDefault());
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         return df.format(cd);
     }
 }

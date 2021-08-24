@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color1"
     tools:context=".student.ui.ProfileActivity">
 
 
@@ -58,13 +57,6 @@
         app:layout_constraintGuide_percent=".6" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/GuideLine_TotalFriends"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent=".69" />
-
-    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/GuideLine_Btn1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -81,7 +73,7 @@
         app:layout_constraintStart_toStartOf="@id/layout_Left"
         app:layout_constraintTop_toTopOf="@id/Image_Top" />
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/name_studentProfile"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -92,7 +84,7 @@
         android:textSize="25sp"
         android:gravity="center" />
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/rollNumber_studentProfile"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -103,7 +95,7 @@
         android:textSize="18sp"
         android:gravity="center" />
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/class_studentProfile"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -114,15 +106,15 @@
         android:textSize="18sp"
         android:gravity="center" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/change_Image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="@id/GuideLine_Btn1"
         app:layout_constraintEnd_toEndOf="@id/layout_Right"
         app:layout_constraintStart_toStartOf="@id/layout_Left"
-        android:padding="15dp"
-        android:backgroundTint="@color/light_green"
+        app:backgroundTint="@null"
+        android:background="@drawable/search_btn_bg"
         android:text="Change Image" />
 
 

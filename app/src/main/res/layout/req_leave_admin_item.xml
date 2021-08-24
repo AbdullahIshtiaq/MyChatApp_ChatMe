@@ -9,6 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="20dp"
+        android:elevation="6dp"
         android:layout_marginBottom="10dp">
 
         <LinearLayout
@@ -26,7 +27,7 @@
                 android:layout_marginEnd="10dp"
                 android:orientation="horizontal">
 
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/name_ReqItemAdmin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -34,7 +35,7 @@
                     android:text="Abdullah Ishtiaq"
                     android:textSize="15sp" />
 
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/rollNumber_ReqItemAdmin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -53,7 +54,7 @@
                 android:layout_marginEnd="10dp"
                 android:orientation="horizontal">
 
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/startDate_ReqItemAdmin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -61,7 +62,7 @@
                     android:text="Start Date: 22-Jun-2021"
                     android:textSize="15sp" />
 
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/status_ReqItemAdmin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -81,7 +82,7 @@
                 android:layout_marginEnd="10dp"
                 android:orientation="vertical">
 
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/endDate_ReqItemAdmin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -89,7 +90,7 @@
                     android:text="End Date: 23-Jun-2021"
                     android:textSize="15sp" />
 
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/description_ReqItemAdmin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -110,7 +111,7 @@
                     android:layout_gravity="center"
                     android:orientation="horizontal">
 
-                    <Button
+                    <com.google.android.material.button.MaterialButton
                         android:id="@+id/acceptBtn_ReqItemAdmin"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -123,7 +124,7 @@
                         android:layout_width="50dp"
                         android:layout_height="wrap_content" />
 
-                    <Button
+                    <com.google.android.material.button.MaterialButton
                         android:id="@+id/rejectBtn_ReqItemAdmin"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

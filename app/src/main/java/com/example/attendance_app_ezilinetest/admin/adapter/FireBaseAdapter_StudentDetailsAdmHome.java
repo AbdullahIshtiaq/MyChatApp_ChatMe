@@ -78,7 +78,7 @@ public class FireBaseAdapter_StudentDetailsAdmHome extends FirebaseRecyclerAdapt
 
                     holder.setPresentView(Integer.toString(presentCount[0]));
                     holder.setAbsentView(Integer.toString(absentCount[0]));
-                    holder.setGradeView(Integer.toString(grade));
+                    holder.setGradeView(grade);
 
                 }
             }
@@ -131,11 +131,12 @@ public class FireBaseAdapter_StudentDetailsAdmHome extends FirebaseRecyclerAdapt
             classView = mView.findViewById(R.id.classRoom_StudentItem);
         }
 
-        public void setGradeView(String grade) {
-            if (grade.compareTo("79") > 0) {
+        public void setGradeView(int grade) {
+            String Grade = Integer.toString(grade);
+            if (grade > 79) {
                 gradeView.setTextColor(ContextCompat.getColor(context, R.color.light_green));
                 this.gradeView.setText(grade + "%");
-            } else if (grade.compareTo("49") > 0) {
+            } else if (grade > 49) {
                 gradeView.setTextColor(ContextCompat.getColor(context, R.color.orange));
                 this.gradeView.setText(grade + "%");
             } else {

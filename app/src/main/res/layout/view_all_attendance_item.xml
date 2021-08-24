@@ -10,6 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:background="@color/color1"
+        android:elevation="6dp"
         app:cardCornerRadius="10dp">
 
         <LinearLayout
@@ -23,7 +24,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <TextView
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/date_AllAttendance_item"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -41,7 +42,7 @@
                     android:gravity="center">
 
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/collapse_Expand_AllAttendance_item"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

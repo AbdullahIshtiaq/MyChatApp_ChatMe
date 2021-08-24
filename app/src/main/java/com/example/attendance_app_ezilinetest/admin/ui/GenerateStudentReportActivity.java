@@ -6,23 +6,19 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.EditText;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.attendance_app_ezilinetest.R;
 import com.example.attendance_app_ezilinetest.admin.adapter.RecyclerViewAdapter_GenerateStudentReport;
 import com.example.attendance_app_ezilinetest.dataModels.Student;
 import com.example.attendance_app_ezilinetest.dataModels.customAttendance;
-import com.google.android.material.card.MaterialCardView;
+import com.example.attendance_app_ezilinetest.databinding.ActivityGenerateStudentReportBinding;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -32,21 +28,19 @@ import com.google.firebase.database.Query;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 public class GenerateStudentReportActivity extends AppCompatActivity {
 
-    private RecyclerViewAdapter_GenerateStudentReport adapter;
+    private static ActivityGenerateStudentReportBinding binding;
+    private View view;
 
-    private TextView fromDateTV, toDateTV;
-    public static TextView rollNumberTV_SR, nameTV_SR, classTV_SR, presentsTV_SR, absentsTV_SR, gradeTV_SR;
-    private EditText rollNumberEditTxt;
-    private Button generateBtn;
-    private RecyclerView recyclerViewReport;
-    private MaterialCardView cardView;
+    private RecyclerViewAdapter_GenerateStudentReport adapter;
 
     private Calendar myCalendar;
     private String calendarDate = null;
@@ -68,6 +62,11 @@ public class GenerateStudentReportActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_generate_student_report);
+
+        binding = ActivityGenerateStudentReportBinding.inflate(getLayoutInflater());
+        view = binding.getRoot();
+        setContentView(view);
+
         mStudentDatabase = FirebaseDatabase.getInstance().getReference().child("Students");
         mAttendanceDatabase = FirebaseDatabase.getInstance().getReference().child("Attendance");
 
@@ -77,19 +76,6 @@ public class GenerateStudentReportActivity extends AppCompatActivity {
         Log.wtf("-this", "77 ");
 
         myCalendar = Calendar.getInstance();
-
-        rollNumberEditTxt = findViewById(R.id.roll_NumberET_StudentReport);
-        fromDateTV = findViewById(R.id.fromDate_StudentReport);
-        toDateTV = findViewById(R.id.toDate_StudentReport);
-        generateBtn = findViewById(R.id.generateReportBtn_StudentReport);
-        rollNumberTV_SR = findViewById(R.id.rollNumberTV_StudentReport);
-        nameTV_SR = findViewById(R.id.nameTV_StudentReport);
-        classTV_SR = findViewById(R.id.classTV_StudentReport);
-        presentsTV_SR = findViewById(R.id.presentsTV_StudentReport);
-        absentsTV_SR = findViewById(R.id.absentsTV_StudentReport);
-        gradeTV_SR = findViewById(R.id.gradeTV_StudentReport);
-        recyclerViewReport = findViewById(R.id.recView_StudentReport);
-        cardView = findViewById(R.id.cardView_StudentReport);
 
         DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -102,16 +88,16 @@ public class GenerateStudentReportActivity extends AppCompatActivity {
                 calendarDate = getDate();
                 if (check == 1) {
                     from_Date = calendarDate;
-                    fromDateTV.setText(from_Date);
+                    binding.fromDateStudentReport.setText(from_Date);
                 } else if (check == 2) {
                     to_Date = calendarDate;
-                    toDateTV.setText(to_Date);
+                    binding.toDateStudentReport.setText(to_Date);
                 }
             }
 
         };
 
-        fromDateTV.setOnClickListener(new View.OnClickListener() {
+        binding.fromDateStudentReport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 check = 1;
@@ -122,7 +108,7 @@ public class GenerateStudentReportActivity extends AppCompatActivity {
             }
         });
 
-        toDateTV.setOnClickListener(new View.OnClickListener() {
+        binding.toDateStudentReport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 check = 2;
@@ -133,67 +119,80 @@ public class GenerateStudentReportActivity extends AppCompatActivity {
             }
         });
 
-        generateBtn.setOnClickListener(new View.OnClickListener() {
+        binding.generateReportBtnStudentReport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String roll_number = rollNumberEditTxt.getText().toString().trim();
-
+                String roll_number = binding.rollNumberETStudentReport.getText().toString().trim();
+                Log.wtf("-this", "Generate Report 130");
                 if (TextUtils.isEmpty(roll_number)) {
-                    rollNumberEditTxt.setError("Roll Number Required");
+                    Log.wtf("-this", "Generate Report 132");
+                    binding.rollNumberETStudentReport.setError("Roll Number Required");
                     return;
                 }
-                rollNumberEditTxt.setError(null);
-                findInList(roll_number);
+                binding.rollNumberETStudentReport.setError(null);
+                try {
+                    findInList(roll_number);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
 
-    public void generateReport(int index) {
+    public void generateReport(int index) throws ParseException {
         Log.wtf("-this", "Generate Report 152");
 
+        Date startDate = convertToDate(from_Date);
+        Date endDate = convertToDate(to_Date);
+
         if (TextUtils.isEmpty(from_Date)) {
-            fromDateTV.setError("Required");
+            binding.fromDateStudentReport.setError("Required");
             return;
         }
-        fromDateTV.setError(null);
+        binding.fromDateStudentReport.setError(null);
         if (TextUtils.isEmpty(to_Date)) {
-            toDateTV.setError("Required");
+            binding.toDateStudentReport.setError("Required");
             return;
         }
-        toDateTV.setError(null);
+        binding.toDateStudentReport.setError(null);
 
-        if (from_Date.compareTo(to_Date) > 0) {
-            fromDateTV.setError("Wrong Date");
+        if (startDate.after(endDate)) {
+            binding.fromDateStudentReport.setError("Wrong Date");
             return;
         }
-        fromDateTV.setError(null);
+        binding.fromDateStudentReport.setError(null);
 
-        Log.wtf("-this", "toDate: " + to_Date);
         Log.wtf("-this", "fromDate: " + from_Date);
+        Log.wtf("-this", "toDate: " + to_Date);
 
-        cardView.setVisibility(View.VISIBLE);
+        binding.cardViewStudentReport.setVisibility(View.VISIBLE);
 
-        rollNumberTV_SR.setText(studentList.get(index).getRoll_number());
-        nameTV_SR.setText(studentList.get(index).getName());
-        classTV_SR.setText("Class: " + studentList.get(index).getClass_room());
+        binding.rollNumberTVStudentReport.setText(studentList.get(index).getRoll_number());
+        binding.nameTVStudentReport.setText(studentList.get(index).getName());
+        binding.classTVStudentReport.setText("Class: " + studentList.get(index).getClass_room());
 
-        String startDate_DataBase = dateList.get(0);
-        String endDate_DataBase = dateList.get(dateList.size() - 1);
+        Date startDate_DataBase = convertToDate(dateList.get(0));
+        Date endDate_DataBase = convertToDate(dateList.get(dateList.size() - 1));
 
-        Log.wtf("-this", "Start Date: " + startDate_DataBase);
-        Log.wtf("-this", "End Date: " + endDate_DataBase);
+        Log.wtf("-this", "Start Date in DB: " + startDate_DataBase);
+        Log.wtf("-this", "End Date in DB: " + endDate_DataBase);
+        Log.wtf("-this", "Start Date: " + startDate);
+        Log.wtf("-this", "End Date: " + endDate);
 
         start = true;
         end = true;
 
 
-        if (from_Date.compareTo(startDate_DataBase) > 0) { // from date is bigger then start date
+        if (startDate.after(startDate_DataBase)) { // from date is bigger then start date
             start = false;
         }
 
-        if (to_Date.compareTo(endDate_DataBase) < 0) { // to is bigger then end date
+        if (endDate.before(endDate_DataBase)) { // to date is smaller then end date
             end = false;
         }
+
+        Log.wtf("-this", "Start: " + start);
+        Log.wtf("-this", "End: " + end);
         Log.wtf("-this", "Generate Report 188");
 
         ArrayList<Integer> array = filterAttendanceList(studentList.get(index).getRoll_number());
@@ -211,26 +210,29 @@ public class GenerateStudentReportActivity extends AppCompatActivity {
         String presentTV = Integer.toString(presents);
         String absentsTV = Integer.toString(absents);
 
-        presentsTV_SR.setText("Present: " + presentTV);
-        absentsTV_SR.setText("Absents: " + absentsTV);
+        binding.presentsTVStudentReport.setText("Present: " + presentTV);
+        binding.absentsTVStudentReport.setText("Absents: " + absentsTV);
 
-        int grade = (presents * 100 / (presents + absents));
+        int grade = 0;
+        if (presents != 0 || absents != 0) {
+            grade = (presents * 100 / (presents + absents));
+        }
         String Grade = Integer.toString(grade);
 
-        if (Grade.compareTo("79") > 0) {
-            gradeTV_SR.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.light_green));
-            gradeTV_SR.setText("Grade: " + grade + "%");
-        } else if (Grade.compareTo("49") > 0) {
-            gradeTV_SR.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.orange));
-            gradeTV_SR.setText("Grade: " + grade + "%");
+        if (grade > 79) {
+            binding.gradeTVStudentReport.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.light_green));
+            binding.gradeTVStudentReport.setText("Grade: " + grade + "%");
+        } else if (grade > 49) {
+            binding.gradeTVStudentReport.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.orange));
+            binding.gradeTVStudentReport.setText("Grade: " + grade + "%");
         } else {
-            gradeTV_SR.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.red));
-            gradeTV_SR.setText("Grade: " + grade + "%");
+            binding.gradeTVStudentReport.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.red));
+            binding.gradeTVStudentReport.setText("Grade: " + grade + "%");
         }
 
-        recyclerViewReport.setLayoutManager(new LinearLayoutManager(this));
+        binding.recViewStudentReport.setLayoutManager(new LinearLayoutManager(this));
         adapter = new RecyclerViewAdapter_GenerateStudentReport(this, myAttendanceList);
-        recyclerViewReport.setAdapter(adapter);
+        binding.recViewStudentReport.setAdapter(adapter);
 
     }
 
@@ -355,71 +357,12 @@ public class GenerateStudentReportActivity extends AppCompatActivity {
         int absents = 0;
 
         for (int i = 0; i < attendanceList.size(); i++) {
+            Log.wtf("-this", "366 Date Running: " + attendanceList.get(i).getDate());
 
-            if (start && end) {
-                Log.wtf("-this", "Start|End");
-                if (attendanceList.get(i).getRollNumber().contentEquals(roll)) {
-                    customAttendance ca = new customAttendance(attendanceList.get(i).getDate(), roll, attendanceList.get(i).getStatus());
-                    myAttendanceList.add(ca);
-                    if (attendanceList.get(i).getStatus().contentEquals("Absent")) {
-                        absents += 1;
-                    } else {
-                        presents += 1;
-                    }
-                }
+            if (!(attendanceList.get(i).getDate().compareTo(to_Date) > 0)) {
 
-            } else if (start == true && end == false) {
-                Log.wtf("-this", "Start");
-                if (attendanceList.get(i).getRollNumber().contentEquals(roll) && !(attendanceList.get(i).getDate().contentEquals(to_Date))) {
-                    Log.wtf("-this", "371");
-                    customAttendance ca = new customAttendance(attendanceList.get(i).getDate(), roll, attendanceList.get(i).getStatus());
-                    myAttendanceList.add(ca);
-                    if (attendanceList.get(i).getStatus().contentEquals("Absent")) {
-                        absents += 1;
-                    } else {
-                        presents += 1;
-                    }
-                } else if (attendanceList.get(i).getRollNumber().contentEquals(roll) && attendanceList.get(i).getDate().contentEquals(to_Date)) {
-                    Log.wtf("-this", "380");
-                    customAttendance ca = new customAttendance(attendanceList.get(i).getDate(), roll, attendanceList.get(i).getStatus());
-                    myAttendanceList.add(ca);
-                    if (attendanceList.get(i).getStatus().contentEquals("Absent")) {
-                        absents += 1;
-                    } else {
-                        presents += 1;
-                    }
-                    break;
-                }
-
-            } else if (start == false && end == true) {
-                Log.wtf("-this", "End: " + i);
-                if (check) {
-                    if (attendanceList.get(i).getRollNumber().contentEquals(roll)) {
-                        Log.wtf("-this", "389");
-                        customAttendance ca = new customAttendance(attendanceList.get(i).getDate(), roll, attendanceList.get(i).getStatus());
-                        myAttendanceList.add(ca);
-                        if (attendanceList.get(i).getStatus().contentEquals("Absent")) {
-                            absents += 1;
-                        } else {
-                            presents += 1;
-                        }
-                    }
-                }
-                if (attendanceList.get(i).getRollNumber().contentEquals(roll) && attendanceList.get(i).getDate().contentEquals(from_Date)) {
-                    check = true;
-                    Log.wtf("-this", "400");
-                    customAttendance ca = new customAttendance(attendanceList.get(i).getDate(), roll, attendanceList.get(i).getStatus());
-                    myAttendanceList.add(ca);
-                    if (attendanceList.get(i).getStatus().contentEquals("Absent")) {
-                        absents += 1;
-                    } else {
-                        presents += 1;
-                    }
-                }
-            } else if (start == false && end == false) {
-                Log.wtf("-this", "Both False: " + i);
-                if (check1) {
-                    Log.wtf("-this", "413");
+                if (start && end) {
+                    Log.wtf("-this", "Start|End");
                     if (attendanceList.get(i).getRollNumber().contentEquals(roll)) {
                         customAttendance ca = new customAttendance(attendanceList.get(i).getDate(), roll, attendanceList.get(i).getStatus());
                         myAttendanceList.add(ca);
@@ -429,20 +372,83 @@ public class GenerateStudentReportActivity extends AppCompatActivity {
                             presents += 1;
                         }
                     }
-                }
-                if (attendanceList.get(i).getRollNumber().contentEquals(roll) && attendanceList.get(i).getDate().contentEquals(from_Date)) {
-                    check1 = true;
-                    Log.wtf("-this", "426");
-                    customAttendance ca = new customAttendance(attendanceList.get(i).getDate(), roll, attendanceList.get(i).getStatus());
-                    myAttendanceList.add(ca);
-                    if (attendanceList.get(i).getStatus().contentEquals("Absent")) {
-                        absents += 1;
-                    } else {
-                        presents += 1;
+
+                } else if (start == true && end == false) {
+                    Log.wtf("-this", "Start");
+                    if (attendanceList.get(i).getRollNumber().contentEquals(roll) && !(attendanceList.get(i).getDate().contentEquals(to_Date))) {
+                        Log.wtf("-this", "371");
+                        customAttendance ca = new customAttendance(attendanceList.get(i).getDate(), roll, attendanceList.get(i).getStatus());
+                        myAttendanceList.add(ca);
+                        if (attendanceList.get(i).getStatus().contentEquals("Absent")) {
+                            absents += 1;
+                        } else {
+                            presents += 1;
+                        }
+                    } else if (attendanceList.get(i).getRollNumber().contentEquals(roll) && attendanceList.get(i).getDate().contentEquals(to_Date)) {
+                        Log.wtf("-this", "380");
+                        customAttendance ca = new customAttendance(attendanceList.get(i).getDate(), roll, attendanceList.get(i).getStatus());
+                        myAttendanceList.add(ca);
+                        if (attendanceList.get(i).getStatus().contentEquals("Absent")) {
+                            absents += 1;
+                        } else {
+                            presents += 1;
+                        }
+                        break;
                     }
-                }
-                if (attendanceList.get(i).getRollNumber().contentEquals(roll) && attendanceList.get(i).getDate().contentEquals(to_Date)) {
-                    Log.wtf("-this", "436");
+
+                } else if (start == false && end == true) {
+                    Log.wtf("-this", "End: " + i);
+                    Log.wtf("-this", "Date: " + attendanceList.get(i).getDate() + " | " + attendanceList.get(i).getRollNumber());
+                    if (check) {
+                        if (attendanceList.get(i).getRollNumber().contentEquals(roll)) {
+                            Log.wtf("-this", "389");
+                            customAttendance ca = new customAttendance(attendanceList.get(i).getDate(), roll, attendanceList.get(i).getStatus());
+                            myAttendanceList.add(ca);
+                            if (attendanceList.get(i).getStatus().contentEquals("Absent")) {
+                                absents += 1;
+                            } else {
+                                presents += 1;
+                            }
+                        }
+                    }
+                    if (attendanceList.get(i).getRollNumber().contentEquals(roll) && attendanceList.get(i).getDate().contentEquals(from_Date)) {
+                        check = true;
+                        Log.wtf("-this", "400");
+                        customAttendance ca = new customAttendance(attendanceList.get(i).getDate(), roll, attendanceList.get(i).getStatus());
+                        myAttendanceList.add(ca);
+                        if (attendanceList.get(i).getStatus().contentEquals("Absent")) {
+                            absents += 1;
+                        } else {
+                            presents += 1;
+                        }
+                    }
+                } else if (start == false && end == false) {
+                    Log.wtf("-this", "Both False: " + i);
+                    if (check1) {
+                        Log.wtf("-this", "413");
+                        if (attendanceList.get(i).getRollNumber().contentEquals(roll)) {
+                            customAttendance ca = new customAttendance(attendanceList.get(i).getDate(), roll, attendanceList.get(i).getStatus());
+                            myAttendanceList.add(ca);
+                            if (attendanceList.get(i).getStatus().contentEquals("Absent")) {
+                                absents += 1;
+                            } else {
+                                presents += 1;
+                            }
+                        }
+                    }
+                    if (attendanceList.get(i).getRollNumber().contentEquals(roll) && attendanceList.get(i).getDate().contentEquals(from_Date)) {
+                        check1 = true;
+                        Log.wtf("-this", "426");
+                        customAttendance ca = new customAttendance(attendanceList.get(i).getDate(), roll, attendanceList.get(i).getStatus());
+                        myAttendanceList.add(ca);
+                        if (attendanceList.get(i).getStatus().contentEquals("Absent")) {
+                            absents += 1;
+                        } else {
+                            presents += 1;
+                        }
+                    }
+                    if (attendanceList.get(i).getRollNumber().contentEquals(roll) && attendanceList.get(i).getDate().contentEquals(to_Date)) {
+                        Log.wtf("-this", "436");
 //                    customAttendance ca = new customAttendance(attendanceList.get(i).getDate(), roll, attendanceList.get(i).getStatus());
 //                    myAttendanceList.add(ca);
 //                    if (attendanceList.get(i).getStatus().contentEquals("Absent")) {
@@ -450,7 +456,8 @@ public class GenerateStudentReportActivity extends AppCompatActivity {
 //                    } else {
 //                        presents += 1;
 //                    }
-                    break;
+                        break;
+                    }
                 }
             }
         }
@@ -459,7 +466,7 @@ public class GenerateStudentReportActivity extends AppCompatActivity {
         return array;
     }
 
-    public void findInList(String rollnumber) {
+    public void findInList(String rollnumber) throws ParseException {
         if (studentList != null && studentList.size() > 0) {
             boolean foundName = false;
             for (int i = 0; i < studentList.size(); i++) {
@@ -470,17 +477,26 @@ public class GenerateStudentReportActivity extends AppCompatActivity {
                 }
             }
             if (!foundName) {
-                rollNumberEditTxt.setError("Roll Number not Registered");
+                Log.wtf("-this", "Generate Report 464");
+                binding.rollNumberETStudentReport.setError("Roll Number not Registered");
+                binding.cardViewStudentReport.setVisibility(View.GONE);
             }
         }
     }
 
     private String getDate() {
 
-        String myFormat = "dd-MMM-yyyy"; //In which you need put here
+        String myFormat = "yyyy-MM-dd"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.getDefault());
         String formatedDate = sdf.format(myCalendar.getTime());
         return formatedDate;
+    }
+
+    private Date convertToDate(String date) throws ParseException {
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date date1 = sdf.parse(date);
+        return date1;
     }
 
     @Override

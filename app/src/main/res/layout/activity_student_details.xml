@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color1"
     tools:context=".admin.ui.StudentDetailsActivity">
 
     <ScrollView
@@ -18,17 +17,17 @@
             android:padding="10dp">
 
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Student Details"
                 android:textAlignment="center"
                 android:textColor="@color/light_green"
                 android:textSize="25sp"
-                android:textStyle="bold" />
+                style="@style/TextAppearance.MaterialComponents.Headline1" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/horizontalRec_StudentDetails"
+                android:id="@+id/recView_StudentDetails"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"

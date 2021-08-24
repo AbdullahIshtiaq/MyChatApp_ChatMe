@@ -2,14 +2,15 @@ package com.example.attendance_app_ezilinetest.admin.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.attendance_app_ezilinetest.R;
 import com.example.attendance_app_ezilinetest.admin.adapter.FireBaseAdminAdapter_ReqLeave;
 import com.example.attendance_app_ezilinetest.dataModels.Leave;
+import com.example.attendance_app_ezilinetest.databinding.ActivityLeaveRequestsBinding;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -17,9 +18,10 @@ import com.google.firebase.database.Query;
 
 public class LeaveRequestsActivity extends AppCompatActivity {
 
-    private FireBaseAdminAdapter_ReqLeave adapter;
-    private RecyclerView mReqLeaveRec;
+    private ActivityLeaveRequestsBinding binding;
+    private View view;
 
+    private FireBaseAdminAdapter_ReqLeave adapter;
     private DatabaseReference mLeaveDatabase;
 
     @Override
@@ -27,13 +29,15 @@ public class LeaveRequestsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_leave_requests);
 
-        mReqLeaveRec = findViewById(R.id.recView_ReqLeaveAdmin);
+        binding = ActivityLeaveRequestsBinding.inflate(getLayoutInflater());
+        view = binding.getRoot();
+        setContentView(view);
 
         mLeaveDatabase = FirebaseDatabase.getInstance().getReference().child("leaves");
 
         Query query = mLeaveDatabase.orderByKey();
 
-        mReqLeaveRec.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        binding.recViewReqLeaveAdmin.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
         FirebaseRecyclerOptions options =
                 new FirebaseRecyclerOptions.Builder<Leave>().setQuery(
@@ -42,7 +46,7 @@ public class LeaveRequestsActivity extends AppCompatActivity {
 
         adapter = new FireBaseAdminAdapter_ReqLeave(options, LeaveRequestsActivity.this);
 
-        mReqLeaveRec.setAdapter(adapter);
+        binding.recViewReqLeaveAdmin.setAdapter(adapter);
     }
 
     @Override

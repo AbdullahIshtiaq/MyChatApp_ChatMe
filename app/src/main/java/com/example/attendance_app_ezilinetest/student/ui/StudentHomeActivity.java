@@ -12,7 +12,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.attendance_app_ezilinetest.MainActivity;
 import com.example.attendance_app_ezilinetest.R;
 import com.example.attendance_app_ezilinetest.student.fragments.MarkAttendanceFragment;
 import com.example.attendance_app_ezilinetest.student.fragments.RequestLeaveFragment;
@@ -103,7 +102,7 @@ public class StudentHomeActivity extends AppCompatActivity {
                         @Override
                         public void onClick(View view) {
                             mAuth.signOut();
-                            startActivity(new Intent(StudentHomeActivity.this, MainActivity.class));
+                            startActivity(new Intent(StudentHomeActivity.this, LoginActivity.class));
                             finish();
                         }
                     });
@@ -148,7 +147,7 @@ public class StudentHomeActivity extends AppCompatActivity {
 
     private String getCurrentDate() {
         Date cd = Calendar.getInstance().getTime();
-        SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy", Locale.getDefault());
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         return df.format(cd);
     }
 

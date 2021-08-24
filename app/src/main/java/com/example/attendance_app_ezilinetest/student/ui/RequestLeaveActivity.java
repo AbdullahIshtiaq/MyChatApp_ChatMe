@@ -6,16 +6,14 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.attendance_app_ezilinetest.R;
+import com.example.attendance_app_ezilinetest.databinding.ActivityRequestLeaveBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -32,9 +30,9 @@ import java.util.concurrent.TimeUnit;
 
 public class RequestLeaveActivity extends AppCompatActivity {
 
-    private TextView startDateTV, endDateTV;
-    private EditText reasonEditTxt;
-    private Button reqLeaveBtn;
+    private ActivityRequestLeaveBinding binding;
+    private View view;
+
     private Calendar myCalendar;
     private String calendarDate = null;
     String start_Date = null;
@@ -53,13 +51,11 @@ public class RequestLeaveActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_request_leave);
 
+        binding = ActivityRequestLeaveBinding.inflate(getLayoutInflater());
+        view = binding.getRoot();
+        setContentView(view);
 
         myCalendar = Calendar.getInstance();
-
-        startDateTV = findViewById(R.id.leaveStartDate);
-        endDateTV = findViewById(R.id.leaveEndDate);
-        reasonEditTxt = findViewById(R.id.reason_ReqLeave);
-        reqLeaveBtn = findViewById(R.id.ReqLeaveBtn_ReqLeave);
 
         mLeaveDatabase = FirebaseDatabase.getInstance().getReference().child("leaves");
 
@@ -77,16 +73,16 @@ public class RequestLeaveActivity extends AppCompatActivity {
                 calendarDate = getDate();
                 if (check == 1) {
                     start_Date = calendarDate;
-                    startDateTV.setText(start_Date);
+                    binding.leaveStartDate.setText(start_Date);
                 } else if (check == 2) {
                     end_Date = calendarDate;
-                    endDateTV.setText(end_Date);
+                    binding.leaveEndDate.setText(end_Date);
                 }
             }
 
         };
 
-        startDateTV.setOnClickListener(new View.OnClickListener() {
+        binding.leaveStartDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 check = 1;
@@ -97,7 +93,7 @@ public class RequestLeaveActivity extends AppCompatActivity {
             }
         });
 
-        endDateTV.setOnClickListener(new View.OnClickListener() {
+        binding.leaveEndDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 check = 2;
@@ -108,30 +104,30 @@ public class RequestLeaveActivity extends AppCompatActivity {
             }
         });
 
-        reqLeaveBtn.setOnClickListener(new View.OnClickListener() {
+        binding.ReqLeaveBtnReqLeave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (TextUtils.isEmpty(start_Date)) {
-                    startDateTV.setError("Required");
+                    binding.leaveStartDate.setError("Required");
                     return;
                 }
-                startDateTV.setError(null);
+                binding.leaveStartDate.setError(null);
                 if (TextUtils.isEmpty(end_Date)) {
-                    endDateTV.setError("Required");
+                    binding.leaveEndDate.setError("Required");
                     return;
                 }
-                endDateTV.setError(null);
+                binding.leaveEndDate.setError(null);
                 if (start_Date.compareTo(end_Date) > 0) {
-                    startDateTV.setError("Wrong Date");
+                    binding.leaveStartDate.setError("Wrong Date");
                     return;
                 }
-                startDateTV.setError(null);
-                reason = reasonEditTxt.getText().toString();
+                binding.leaveStartDate.setError(null);
+                reason = binding.reasonReqLeave.getText().toString();
                 if (TextUtils.isEmpty(reason)) {
-                    reasonEditTxt.setError("Required");
+                    binding.reasonReqLeave.setError("Required");
                     return;
                 }
-                reasonEditTxt.setError(null);
+                binding.reasonReqLeave.setError(null);
 
                 timeStamp = String.valueOf(TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis()));
 
@@ -163,7 +159,7 @@ public class RequestLeaveActivity extends AppCompatActivity {
     }
 
     private String getDate() {
-        String myFormat = "dd-MMM-yyyy"; //In which you need put here
+        String myFormat = "yyyy-MM-dd"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.getDefault());
         String formatedDate = sdf.format(myCalendar.getTime());
         return formatedDate;
